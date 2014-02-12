@@ -3,13 +3,15 @@ class ElementBehaviour extends CModelBehavior {
 
 	/**
 	 * @param VisitorInterface $visitor
+	 *
+	 * @return mixed
 	 */
 	public function accept(VisitorInterface $visitor) {
 		$method = 'visit' . get_class($this->getOwner());
 		if (method_exists($visitor, $method)) {
-			$visitor->$method($this->getOwner());
+			return $visitor->$method($this->getOwner());
 		} else {
-			$visitor->visit($this->getOwner());
+			return $visitor->visit($this->getOwner());
 		}
 	}
 }
